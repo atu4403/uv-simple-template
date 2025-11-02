@@ -1,3 +1,3 @@
-"""{{project_name}} package."""
+"""{{ project_name }} package."""
 
 __version__ = "0.1.0"

@@ -1,4 +1,4 @@
-"""Sample tests for {{project_name}}."""
+"""Sample tests for {{ project_name }}."""
 
 import pytest
 

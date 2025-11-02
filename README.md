@@ -36,12 +36,12 @@ cd your-project-name
 
 ```
 .
-├── pyproject.toml          # uv対応のプロジェクト設定
+├── pyproject.toml            # uv対応のプロジェクト設定
 ├── src/
-│   └── {{project_name}}/   # パッケージソースコード
+│   └── {{ project_name }}/   # パッケージソースコード（要置換）
 │       └── __init__.py
 └── tests/
-    └── test_sample.py      # サンプルテスト
+    └── test_sample.py        # サンプルテスト
 ```
 
 ## ライセンス

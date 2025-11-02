@@ -21,23 +21,34 @@ cd your-project-name
 
 ### 2. プレースホルダーの置換
 
-以下のファイルに含まれるプレースホルダーを実際の値に置き換えてください。
+**重要: `uv sync` を実行する前に、必ずプレースホルダーを置換してください。**
 
-#### pyproject.toml
+プレースホルダーのまま `uv sync` を実行すると、バリデーションエラーが発生します。これは意図的な動作で、確実に置換を行うための仕組みです。
 
-- `{{project_name}}` → あなたのプロジェクト名（例: `my_awesome_project`）
+#### 置換するプレースホルダー
+
+以下のプレースホルダーをあなたのプロジェクトの値に置き換えます：
+
+- `{{ project_name }}` → あなたのプロジェクト名（例: `my_awesome_project`）
 - `{{ project_description }}` → プロジェクトの説明（例: `A sample Python project`）
 
-#### src/{{project_name}}/__init__.py
+#### VSCodeでの一括置き換え方法（推奨）
 
-- ディレクトリ名 `{{project_name}}` → あなたのプロジェクト名に変更
-  ```bash
-  mv "src/{{project_name}}" "src/your_project_name"
-  ```
+1. VSCodeでプロジェクトを開く
+2. `Cmd+Shift+F` (macOS) または `Ctrl+Shift+F` (Windows/Linux) で検索を開く
+3. 検索欄の左の「>」をクリックして置換モードに切り替え
+4. 検索: `{{ project_name }}`、置換: `your_project_name`
+5. 「すべて置換」をクリック
+6. 同様に `{{ project_description }}` も置換
 
-#### tests/test_sample.py
+#### ディレクトリ名の変更
 
-- ファイル内の `{{project_name}}` → あなたのプロジェクト名に置換
+```bash
+# プロジェクト名をmy_projectとした場合の例
+mv "src/{{ project_name }}" "src/my_project"
+```
+
+**注意:** pyproject.tomlの`name`フィールドではハイフン（`my-project`）が使えますが、Pythonパッケージ名（ディレクトリ名）にはアンダースコア（`my_project`）を使用してください。
 
 ### 3. ライセンスの設定
 
@@ -81,12 +92,12 @@ uv run ruff check .
 
 ```
 .
-├── pyproject.toml          # プロジェクト設定ファイル
+├── pyproject.toml            # プロジェクト設定ファイル
 ├── src/
-│   └── {{project_name}}/   # パッケージのソースコード
+│   └── {{ project_name }}/   # パッケージのソースコード（要置換）
 │       └── __init__.py
 └── tests/
-    └── test_sample.py      # テストファイル
+    └── test_sample.py        # テストファイル
 ```
 
 ## 依存関係の追加
@@ -101,13 +112,9 @@ uv add --dev package-name
 
 ## よくある質問
 
-### Q. プロジェクト名にハイフンを使いたい
+### Q. uv sync でエラーが出る
 
-A. pyproject.tomlの`name`フィールドではハイフンを使用できますが、Pythonパッケージ名（ディレクトリ名）にはアンダースコアを使用してください。
-
-例:
-- pyproject.toml: `name = "my-awesome-project"`
-- ディレクトリ: `src/my_awesome_project/`
+A. プレースホルダー（`{{ project_name }}` など）を置換せずに `uv sync` を実行するとエラーになります。これは意図的な動作です。「2. プレースホルダーの置換」の手順に従って、必ず置換してから `uv sync` を実行してください。
 
 ### Q. Python バージョンを変更したい
 
